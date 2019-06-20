@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id" xmlns:tools="http://schemas.android.com/tools">
+  <string name="firebase_database_url" translatable="false">https://tomaelcontrol-830dd.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">913825052825</string>
+  <string name="google_storage_bucket" translatable="false">tomaelcontrol-830dd.appspot.com</string>
+  <string name="project_id" translatable="false">tomaelcontrol-830dd</string>
+  <string name="google_api_key" translatable="false">AIzaSyA44sL4Pt90N4LzDX00e_GaXomRCuChoFA</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA44sL4Pt90N4LzDX00e_GaXomRCuChoFA</string>
+  <string name="google_app_id" translatable="false">1:913825052825:android:e72247d0e46909e0</string>
+  <string name="default_web_client_id" translatable="false">913825052825-psiffjbk4ff1atc9pl51jcdn52c07joi.apps.googleusercontent.com</string>
+</resources>

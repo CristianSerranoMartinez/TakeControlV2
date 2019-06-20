@@ -1,0 +1,23 @@
+{
+	"bucketList": 
+	[
+		{
+			"name": "Cristian",
+			"title": "expo 3",
+			"time": "11:00",
+			"desc": "desc para Cristian"
+		},
+		{
+			"name": "Gustavo",
+			"title": "expo 4",
+			"time": "9:00",
+			"desc": "desc para Gustavo"
+		},
+		{
+			"name": "Paulina",
+			"title": "expo 5",
+			"time": "7:30",
+			"desc": "desc para Paulina"
+		}
+	]
+}

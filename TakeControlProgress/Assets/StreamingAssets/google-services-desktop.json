@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "913825052825",
+    "firebase_url": "https://tomaelcontrol-830dd.firebaseio.com",
+    "project_id": "tomaelcontrol-830dd",
+    "storage_bucket": "tomaelcontrol-830dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913825052825:android:e72247d0e46909e0",
+        "android_client_info": {
+          "package_name": "com.TroopsMX.AltimaTC"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913825052825-psiffjbk4ff1atc9pl51jcdn52c07joi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA44sL4Pt90N4LzDX00e_GaXomRCuChoFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913825052825-psiffjbk4ff1atc9pl51jcdn52c07joi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

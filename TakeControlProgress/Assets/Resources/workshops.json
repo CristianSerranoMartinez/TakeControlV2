@@ -1,0 +1,40 @@
+{
+    "workshops": 
+    [
+        {
+			"id" :"0",
+            "name": "Fernando Ruiz",
+            "title": "expo 1",
+            "time": "12:30",
+            "desc": "desc para Fernando"
+        },
+        {
+			"id" :"1",
+            "name": "Jorge Armando",
+            "title": "expo 2",
+            "time": "8:00",
+            "desc": "desc para Jorge"
+        },
+        {
+			"id" :"3",
+            "name": "Cristian",
+            "title": "expo 3",
+            "time": "11:00",
+            "desc": "desc para Cristian"
+        },
+        {
+			"id" :"4",
+            "name": "Gustavo",
+            "title": "expo 4",
+            "time": "9:00",
+            "desc": "desc para Gustavo"
+        },
+        {
+			"id" :"5",
+            "name": "Paulina",
+            "title": "expo 5",
+            "time": "7:30",
+            "desc": "desc para Paulina"
+        }
+    ]
+}

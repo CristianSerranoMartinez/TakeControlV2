@@ -48,7 +48,7 @@ public class LoadSpeakers : MonoBehaviour {
             //Obtener indice que coincida con el nombre de la imagen y el id del speaker
             int index = Array.FindIndex(imgSpeakers, img => img.name == s.id);
 
-           // but.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(s.name, s.title, s.time, s.desc, imgSpeakers[index], (int)id));  //Haz el cast de string a int id porfas gustavo :D >:v
+            but.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(s.name, s.title, s.time, s.desc, imgSpeakers[index], int.Parse(s.id))); 
 
         }
 

@@ -49,7 +49,7 @@ public class LoadWorkshops : MonoBehaviour
             //Obtener indice que coincida con el nombre de la imagen y el id del speaker
             int index = Array.FindIndex(imgSpeakers, img => img.name == s.id);
 
-            but.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(s.name, s.title, s.time, s.desc, imgSpeakers[index]));
+            but.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(s.name, s.title, s.time, s.desc, imgSpeakers[index], int.Parse(s.id)));
         }
 
         //cambiar tamaño del content
@@ -58,16 +58,16 @@ public class LoadWorkshops : MonoBehaviour
         content.sizeDelta = new Vector2(content.sizeDelta.x, desplazador);
     }
 
-    private void OnButtonClick(string name, string title, string time, string desc, Sprite foto)
+    private void OnButtonClick(string name, string title, string time, string desc, Sprite foto, int id)
     {
         //abrir detalles workshop
         GameObject.Find("PanelWorkShops").GetComponent<PanelWorkShopsManager>().OnPressMasterDetail();
-
         GameObject.Find("PanelMasterDetail").transform.GetChild(2).GetComponent<Image>().sprite = foto;
         GameObject.Find("PanelMasterDetail").transform.GetChild(3).GetComponent<Text>().text = name;
         GameObject.Find("PanelMasterDetail").transform.GetChild(4).GetComponent<Text>().text = title;
         GameObject.Find("PanelMasterDetail").transform.GetChild(5).GetComponent<Text>().text = desc;
         GameObject.Find("PanelMasterDetail").transform.GetChild(6).GetComponent<Text>().text = time;
+        GameObject.Find("PanelMasterDetail").GetComponent<PanelMasterDetailManager>().idSpeaker = id;
     }
 
 }

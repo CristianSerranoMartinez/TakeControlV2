@@ -21101,7 +21101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1510932450
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21175,6 +21175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrayPanels: []
+  textLogError: {fileID: 0}
+  idSpeaker: 0
 --- !u!95 &1510932454
 Animator:
   serializedVersion: 3

@@ -48,7 +48,7 @@ public class LoadSpeakers : MonoBehaviour {
             //Obtener indice que coincida con el nombre de la imagen y el id del speaker
             int index = Array.FindIndex(imgSpeakers, img => img.name == s.id);
 
-            but.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(s.name, s.title, s.time, s.desc, imgSpeakers[index]));
+           // but.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(s.name, s.title, s.time, s.desc, imgSpeakers[index], (int)id));  //Haz el cast de string a int id porfas gustavo :D >:v
 
         }
 
@@ -59,7 +59,7 @@ public class LoadSpeakers : MonoBehaviour {
 
     }
 
-    private void OnButtonClick(string name, string title, string time, string desc, Sprite foto)
+    private void OnButtonClick(string name, string title, string time, string desc, Sprite foto, int id)
     {
 
         GameObject.Find("PanelSpeakers").GetComponent<PanelSpeakersManager>().OnPressMasterDetail();
@@ -68,6 +68,7 @@ public class LoadSpeakers : MonoBehaviour {
         GameObject.Find("PanelMasterDetail").transform.GetChild(4).GetComponent<Text>().text = title;
         GameObject.Find("PanelMasterDetail").transform.GetChild(5).GetComponent<Text>().text = desc;
         GameObject.Find("PanelMasterDetail").transform.GetChild(6).GetComponent<Text>().text = time;
+        GameObject.Find("PanelMasterDetail").GetComponent<PanelMasterDetailManager>().idSpeaker = id;
 
     }
 

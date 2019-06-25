@@ -22,6 +22,8 @@ public class PanelMasterDetailManager : MonoBehaviour {
     public int idSpeaker;
 
     SpeakersSubcriptions speakersSubcriptions;
+
+    public bool[] boolArray = new bool[4];
 	
 	// Update is called once per frame
 	void Update () {
@@ -41,15 +43,17 @@ public class PanelMasterDetailManager : MonoBehaviour {
 
     public void OnPressButtonRegister()
     {
-        switch (idSpeaker)
+       switch (idSpeaker)
         {
-            case 0: { speakersSubcriptions.one = true; } break;
-            case 1: { speakersSubcriptions.two = true; } break;
-            case 2: { speakersSubcriptions.three = true; } break;
-            case 3: { speakersSubcriptions.four = true; } break;
+            case 0: { boolArray[0] = true; } break;
+            case 1: { boolArray[1] = true; } break;
+            case 2: { boolArray[2] = true; } break;
+            case 3: { boolArray[3] = true; } break;
             default: break;
 
         }
+
+        speakersSubcriptions = new SpeakersSubcriptions(boolArray[0], boolArray[1], boolArray[2], boolArray[3]);
 
         UpdateBase();
     }
@@ -111,12 +115,18 @@ public class PanelMasterDetailManager : MonoBehaviour {
 
                 speakersSubcriptions = JsonUtility.FromJson<SpeakersSubcriptions>(snapshot.GetRawJsonValue());
                 /* En el one or two or tree son true y es igual a cualquiera de estos que est en verdarero cambiar el boton*/
+
+                boolArray[0] = speakersSubcriptions.one;
+                boolArray[1] = speakersSubcriptions.one;
+                boolArray[2] = speakersSubcriptions.one;
+                boolArray[3] = speakersSubcriptions.one;
+
                 switch (idSpeaker)
                 {
-                    case 0: { buttonRegister.SetActive(!speakersSubcriptions.one); buttonDoQuestion.SetActive(speakersSubcriptions.one); } break;
-                    case 1: { buttonRegister.SetActive(!speakersSubcriptions.two); buttonDoQuestion.SetActive(speakersSubcriptions.two); } break;
-                    case 2: { buttonRegister.SetActive(!speakersSubcriptions.three); buttonDoQuestion.SetActive(speakersSubcriptions.three); } break;
-                    case 3: { buttonRegister.SetActive(!speakersSubcriptions.four); buttonDoQuestion.SetActive(speakersSubcriptions.four); } break;
+                    case 0: { buttonRegister.SetActive(!boolArray[0]); buttonDoQuestion.SetActive(boolArray[1]); } break;
+                    case 1: { buttonRegister.SetActive(!boolArray[1]); buttonDoQuestion.SetActive(boolArray[2]); } break;
+                    case 2: { buttonRegister.SetActive(!boolArray[2]); buttonDoQuestion.SetActive(boolArray[3]); } break;
+                    case 3: { buttonRegister.SetActive(!boolArray[3]); buttonDoQuestion.SetActive(boolArray[4]); } break;
                 }       
             }
         });

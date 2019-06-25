@@ -19530,6 +19530,7 @@ MonoBehaviour:
   buttonRegister: {fileID: 2144202528}
   buttonDoQuestion: {fileID: 802980601}
   idSpeaker: 0
+  boolArray: 00000000
 --- !u!95 &1510932454
 Animator:
   serializedVersion: 3

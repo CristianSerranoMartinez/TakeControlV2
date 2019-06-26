@@ -62,12 +62,12 @@ public class LoadWorkshops : MonoBehaviour
     {
         //abrir detalles workshop
         GameObject.Find("PanelWorkShops").GetComponent<PanelWorkShopsManager>().OnPressMasterDetail();
-        GameObject.Find("PanelMasterDetail").transform.GetChild(2).GetComponent<Image>().sprite = foto;
-        GameObject.Find("PanelMasterDetail").transform.GetChild(3).GetComponent<Text>().text = name;
-        GameObject.Find("PanelMasterDetail").transform.GetChild(4).GetComponent<Text>().text = title;
-        GameObject.Find("PanelMasterDetail").transform.GetChild(5).GetComponent<Text>().text = desc;
-        GameObject.Find("PanelMasterDetail").transform.GetChild(6).GetComponent<Text>().text = time;
-        GameObject.Find("PanelMasterDetail").GetComponent<PanelMasterDetailManager>().idSpeaker = id;
+        GameObject.Find("PanelMasterDetailWorkShops").transform.GetChild(2).GetComponent<Image>().sprite = foto;
+        GameObject.Find("PanelMasterDetailWorkShops").transform.GetChild(3).GetComponent<Text>().text = name;
+        GameObject.Find("PanelMasterDetailWorkShops").transform.GetChild(4).GetComponent<Text>().text = title;
+        GameObject.Find("PanelMasterDetailWorkShops").transform.GetChild(5).GetComponent<Text>().text = desc;
+        GameObject.Find("PanelMasterDetailWorkShops").transform.GetChild(6).GetComponent<Text>().text = time;
+        GameObject.Find("PanelMasterDetailWorkShops").GetComponent<PanelMasterDetailManagerWorkShops>().idWorkShops = id;
     }
 
 }

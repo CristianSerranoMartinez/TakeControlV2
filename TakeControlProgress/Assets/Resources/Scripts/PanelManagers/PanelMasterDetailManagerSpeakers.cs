@@ -5,7 +5,7 @@ using System;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class PanelMasterDetailManager : MonoBehaviour {
+public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
 
     [SerializeField]
     private GameObject[] arrayPanels;

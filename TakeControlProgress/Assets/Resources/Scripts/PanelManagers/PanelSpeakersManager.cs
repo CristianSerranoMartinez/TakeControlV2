@@ -38,7 +38,7 @@ public class PanelSpeakersManager : MonoBehaviour {
         {
             switch (gameObject.name)
             {
-                case "PanelMasterDetail": gameObject.SetActive(true); break;
+                case "PanelMasterDetailSpeakers": gameObject.SetActive(true); break;
             }
         }
     }

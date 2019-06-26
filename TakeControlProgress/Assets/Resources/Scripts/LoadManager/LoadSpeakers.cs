@@ -63,12 +63,12 @@ public class LoadSpeakers : MonoBehaviour {
     {
 
         GameObject.Find("PanelSpeakers").GetComponent<PanelSpeakersManager>().OnPressMasterDetail();
-        GameObject.Find("PanelMasterDetail").transform.GetChild(2).GetComponent<Image>().sprite = foto;
-        GameObject.Find("PanelMasterDetail").transform.GetChild(3).GetComponent<Text>().text = name;
-        GameObject.Find("PanelMasterDetail").transform.GetChild(4).GetComponent<Text>().text = title;
-        GameObject.Find("PanelMasterDetail").transform.GetChild(5).GetComponent<Text>().text = desc;
-        GameObject.Find("PanelMasterDetail").transform.GetChild(6).GetComponent<Text>().text = time;
-        GameObject.Find("PanelMasterDetail").GetComponent<PanelMasterDetailManager>().idSpeaker = id;
+        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(2).GetComponent<Image>().sprite = foto;
+        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(3).GetComponent<Text>().text = name;
+        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(4).GetComponent<Text>().text = title;
+        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(5).GetComponent<Text>().text = desc;
+        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(6).GetComponent<Text>().text = time;
+        GameObject.Find("PanelMasterDetailSpeakers").GetComponent<PanelMasterDetailManagerSpeakers>().idSpeaker = id;
 
     }
 

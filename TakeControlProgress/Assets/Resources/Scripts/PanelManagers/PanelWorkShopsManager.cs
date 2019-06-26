@@ -38,7 +38,7 @@ public class PanelWorkShopsManager : MonoBehaviour {
         {
             switch (gameObject.name)
             {
-                case "PanelMasterDetail": gameObject.SetActive(true); break;
+                case "PanelMasterDetailWorkShops": gameObject.SetActive(true); break;
             }
         }
     }

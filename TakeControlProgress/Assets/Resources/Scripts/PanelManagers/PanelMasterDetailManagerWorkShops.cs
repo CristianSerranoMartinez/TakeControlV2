@@ -5,19 +5,29 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PanelConversationsTakenManager : MonoBehaviour {
-
+public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
     [SerializeField]
-    private Toggle[] arrayToggles;
+    private GameObject[] arrayPanels;
 
     [SerializeField]
     private Text textLogError;
 
-    SpeakersSubcriptions speakersSubcriptions;
+    [SerializeField]
+    private GameObject buttonRegister;
 
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape)) { OnPressButtonOutPanel(); }
+    [SerializeField]
+    private GameObject buttonDoQuestion;
+
+    public int idWorkShops;
+
+    WorkShopsSubcriptions workShopsSubcriptions;
+
+    public bool[] boolArray = new bool[4];
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) { GetComponent<Animator>().SetTrigger("Close"); }
     }
 
     public void OnPressButtonOutPanel()
@@ -30,20 +40,28 @@ public class PanelConversationsTakenManager : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
-    public void OnPressButtonAccept()
+
+    public void OnPressButtonRegister()
     {
-        speakersSubcriptions = new SpeakersSubcriptions(arrayToggles[0].isOn,
-            arrayToggles[1].isOn,
-            arrayToggles[2].isOn,
-            arrayToggles[3].isOn
-            );
+        switch (idWorkShops)
+        {
+            case 0: { boolArray[0] = true; } break;
+            case 1: { boolArray[1] = true; } break;
+            case 2: { boolArray[2] = true; } break;
+            case 3: { boolArray[3] = true; } break;
+            default: break;
+
+        }
+
+        workShopsSubcriptions = new WorkShopsSubcriptions(boolArray[0], boolArray[1], boolArray[2], boolArray[3]);
+
         UpdateBase();
     }
 
     private void OnEnable()
     {
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://tomaelcontrol-830dd.firebaseio.com/");
-        FirebaseDatabase.DefaultInstance.GetReference("SpeakersSubcriptions/" + Session.auth.CurrentUser.UserId).GetValueAsync().ContinueWith(task => {
+        FirebaseDatabase.DefaultInstance.GetReference("WorkShopsSubcriptions/" + Session.auth.CurrentUser.UserId).GetValueAsync().ContinueWith(task => {
 
             if (task.IsFaulted)
             {
@@ -94,14 +112,26 @@ public class PanelConversationsTakenManager : MonoBehaviour {
             if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
-                speakersSubcriptions = JsonUtility.FromJson<SpeakersSubcriptions>(snapshot.GetRawJsonValue());
-                arrayToggles[0].isOn = speakersSubcriptions.one;
-                arrayToggles[1].isOn = speakersSubcriptions.two;
-                arrayToggles[2].isOn = speakersSubcriptions.three;
-                arrayToggles[3].isOn = speakersSubcriptions.four;
+
+                workShopsSubcriptions = JsonUtility.FromJson<WorkShopsSubcriptions>(snapshot.GetRawJsonValue());
+                /* En el one or two or tree son true y es igual a cualquiera de estos que est en verdarero cambiar el boton*/
+
+                boolArray[0] = workShopsSubcriptions.one;
+                boolArray[1] = workShopsSubcriptions.one;
+                boolArray[2] = workShopsSubcriptions.one;
+                boolArray[3] = workShopsSubcriptions.one;
+
+                switch (idWorkShops)
+                {
+                    case 0: { buttonRegister.SetActive(!boolArray[0]); buttonDoQuestion.SetActive(boolArray[1]); } break;
+                    case 1: { buttonRegister.SetActive(!boolArray[1]); buttonDoQuestion.SetActive(boolArray[2]); } break;
+                    case 2: { buttonRegister.SetActive(!boolArray[2]); buttonDoQuestion.SetActive(boolArray[3]); } break;
+                    case 3: { buttonRegister.SetActive(!boolArray[3]); buttonDoQuestion.SetActive(boolArray[4]); } break;
+                }
             }
         });
     }
+
 
     public void UpdateBase()
     {
@@ -111,8 +141,8 @@ public class PanelConversationsTakenManager : MonoBehaviour {
         // Get the root reference location of the database.
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        string json = JsonUtility.ToJson(speakersSubcriptions);
-        reference.Child("SpeakersSubcriptions").Child(Session.auth.CurrentUser.UserId).SetRawJsonValueAsync(json).ContinueWith(task => {
+        string json = JsonUtility.ToJson(workShopsSubcriptions);
+        reference.Child("WorkShopsSubcriptions").Child(Session.auth.CurrentUser.UserId).SetRawJsonValueAsync(json).ContinueWith(task => {
 
             if (task.IsCanceled)
             {
@@ -139,11 +169,11 @@ public class PanelConversationsTakenManager : MonoBehaviour {
             if (task.IsFaulted)
             {
                 Debug.LogError("SetRawJsonValueAsync was faulted.");
-                AggregateException exception = task.Exception as AggregateException;
+                AggregateException exception = task.Exception as System.AggregateException;
                 if (exception != null)
                 {
                     FirebaseException fireBaseException = null;
-                    foreach (Exception e in exception.InnerExceptions)
+                    foreach (System.Exception e in exception.InnerExceptions)
                     {
                         fireBaseException = e as FirebaseException;
                         if (fireBaseException != null)
@@ -160,6 +190,8 @@ public class PanelConversationsTakenManager : MonoBehaviour {
             }
             if (task.IsCompleted)
             {
+                buttonRegister.SetActive(false);
+                buttonDoQuestion.SetActive(true);
                 textLogError.text = "Done!";
             }
         });

@@ -34,8 +34,7 @@ public class PanelConversationsTakenManager : MonoBehaviour {
     {
         speakersSubcriptions = new SpeakersSubcriptions(arrayToggles[0].isOn,
             arrayToggles[1].isOn,
-            arrayToggles[2].isOn,
-            arrayToggles[3].isOn
+            arrayToggles[2].isOn
             );
         UpdateBase();
     }
@@ -98,7 +97,6 @@ public class PanelConversationsTakenManager : MonoBehaviour {
                 arrayToggles[0].isOn = speakersSubcriptions.one;
                 arrayToggles[1].isOn = speakersSubcriptions.two;
                 arrayToggles[2].isOn = speakersSubcriptions.three;
-                arrayToggles[3].isOn = speakersSubcriptions.four;
             }
         });
     }

@@ -22,7 +22,7 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
 
     WorkShopsSubcriptions workShopsSubcriptions;
 
-    public bool[] boolArray = new bool[4];
+    public bool[] boolArray = new bool[2];
 
     // Update is called once per frame
     void Update()
@@ -47,19 +47,19 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
         {
             case 0: { boolArray[0] = true; } break;
             case 1: { boolArray[1] = true; } break;
-            case 2: { boolArray[2] = true; } break;
-            case 3: { boolArray[3] = true; } break;
             default: break;
 
         }
 
-        workShopsSubcriptions = new WorkShopsSubcriptions(boolArray[0], boolArray[1], boolArray[2], boolArray[3]);
+        workShopsSubcriptions = new WorkShopsSubcriptions(boolArray[0], boolArray[1]);
 
         UpdateBase();
     }
 
     private void OnEnable()
     {
+        buttonDoQuestion.SetActive(false);
+        buttonRegister.SetActive(false);
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://tomaelcontrol-830dd.firebaseio.com/");
         FirebaseDatabase.DefaultInstance.GetReference("WorkShopsSubcriptions/" + Session.auth.CurrentUser.UserId).GetValueAsync().ContinueWith(task => {
 
@@ -117,16 +117,12 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
                 /* En el one or two or tree son true y es igual a cualquiera de estos que est en verdarero cambiar el boton*/
 
                 boolArray[0] = workShopsSubcriptions.one;
-                boolArray[1] = workShopsSubcriptions.one;
-                boolArray[2] = workShopsSubcriptions.one;
-                boolArray[3] = workShopsSubcriptions.one;
+                boolArray[1] = workShopsSubcriptions.two;
 
                 switch (idWorkShops)
                 {
-                    case 0: { buttonRegister.SetActive(!boolArray[0]); buttonDoQuestion.SetActive(boolArray[1]); } break;
-                    case 1: { buttonRegister.SetActive(!boolArray[1]); buttonDoQuestion.SetActive(boolArray[2]); } break;
-                    case 2: { buttonRegister.SetActive(!boolArray[2]); buttonDoQuestion.SetActive(boolArray[3]); } break;
-                    case 3: { buttonRegister.SetActive(!boolArray[3]); buttonDoQuestion.SetActive(boolArray[4]); } break;
+                    case 0: { buttonRegister.SetActive(!boolArray[0]); buttonDoQuestion.SetActive(boolArray[0]); } break;
+                    case 1: { buttonRegister.SetActive(!boolArray[1]); buttonDoQuestion.SetActive(boolArray[1]); } break;
                 }
             }
         });

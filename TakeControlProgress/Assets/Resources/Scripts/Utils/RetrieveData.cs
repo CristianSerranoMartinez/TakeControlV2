@@ -14,66 +14,7 @@ public class RetrieveData : MonoBehaviour
     private string reference;
 
     // Use this for initialization
-    void OnEnable()
-    {
-        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://tomaelcontrol-830dd.firebaseio.com/");
-        FirebaseDatabase.DefaultInstance.GetReference("users/" + Session.auth.CurrentUser.UserId).GetValueAsync().ContinueWith(task => {
 
-            if (task.IsFaulted)
-            {
-                // panelLoading.SetActive(false);
-                AggregateException exception = task.Exception as AggregateException;
-                if (exception != null)
-                {
-                    FirebaseException fireBaseException = null;
-                    foreach (Exception e in exception.InnerExceptions)
-                    {
-                        //   panelLoading.SetActive(false);
-                        fireBaseException = e as FirebaseException;
-                        if (fireBaseException != null)
-                            break;
-                    }
-
-                    if (fireBaseException != null)
-                    {
-                        Debug.LogError("FirebaseDatabase defaultInstance getReference encountered an error: " + fireBaseException.Message);
-                        textLogError.text = fireBaseException.Message;
-                    }
-                }
-                return;
-            }
-
-            if (task.IsCanceled)
-            {
-                //   panelLoading.SetActive(false);
-                AggregateException exception = task.Exception as AggregateException;
-                if (exception != null)
-                {
-                    FirebaseException fireBaseException = null;
-                    foreach (Exception e in exception.InnerExceptions)
-                    {
-                        // panelLoading.SetActive(false);
-                        fireBaseException = e as FirebaseException;
-                        if (fireBaseException != null)
-                            break;
-                    }
-
-                    if (fireBaseException != null)
-                    {
-                        Debug.LogError("FirebaseDatabase defaultInstance getReference encountered an error: " + fireBaseException.Message);
-                        textLogError.text = fireBaseException.Message;
-                    }
-                }
-                return;
-            }
-
-            if (task.IsCompleted)
-            {
-                DataSnapshot snapshot = task.Result;
-                Session.currentUser = JsonUtility.FromJson<User>(snapshot.GetRawJsonValue());
-            }
-        });
-    }
 
     /*private void OnApplicationQuit()
     {

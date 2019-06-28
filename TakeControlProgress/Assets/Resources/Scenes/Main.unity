@@ -627,7 +627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &58867662
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11466,10 +11466,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e994f0538b9b2e6439d6173724b6d072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameSpeaker: 
-  titleSpeaker: 
-  timeSpeaker: 
-  descSpeaker: 
+  nameSpeaker: OSCAR MADRAZO
+  titleSpeaker: Conversaciones con Oscar Madrazo
+  timeSpeaker: "Una pl\xE1tica con Oscar Madrazo, el cual nos contara su experiencia
+    de como tomo el control."
+  descSpeaker: 17:15 hrs           Zona "A"
   panelSpeaker: {fileID: 21300000, guid: 03b5a4b43406fdc4b9a295b331ee9832, type: 3}
   idSpeaker: 1
 --- !u!114 &1098057272
@@ -11592,11 +11593,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e994f0538b9b2e6439d6173724b6d072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameSpeaker: 
-  titleSpeaker: 
-  timeSpeaker: 
-  descSpeaker: 
-  panelSpeaker: {fileID: 21300000, guid: 03b5a4b43406fdc4b9a295b331ee9832, type: 3}
+  nameSpeaker: MARION REIMERS
+  titleSpeaker: Conversaciones con Marion Reimers
+  timeSpeaker: "Una pl\xE1tica con Marion Reimers, el cual nos contara su experiencia
+    de como tomo el control."
+  descSpeaker: 18:20 hrs           Zona "A"
+  panelSpeaker: {fileID: 21300000, guid: 81f54d97396d1e0438d11c40f2235d2c, type: 3}
   idSpeaker: 2
 --- !u!114 &1108819137
 MonoBehaviour:
@@ -14995,10 +14997,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e994f0538b9b2e6439d6173724b6d072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameSpeaker: 
-  titleSpeaker: 
-  timeSpeaker: 
-  descSpeaker: 
+  nameSpeaker: ALAN ESTRADA
+  titleSpeaker: Conversaciones con Alan Estrada
+  timeSpeaker: "Una pl\xE1tica con Alan Estrada, el cual nos contara su experiencia
+    de como tomo el control."
+  descSpeaker: 13:45 hrs           Zona "A"
   panelSpeaker: {fileID: 21300000, guid: 1b77a93a37c5a0147a81ff5b127f3d1a, type: 3}
   idSpeaker: 0
 --- !u!114 &1407623669
@@ -15558,7 +15561,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 249.99998, y: 59}
-  m_SizeDelta: {x: 269.7, y: 58}
+  m_SizeDelta: {x: 300.6, y: 58}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1465615540
 MonoBehaviour:
@@ -18207,11 +18210,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206a96bf0b80faa4e91fd878cd4c4ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameWorkShops: 
-  titleWorkShops: 
+  nameWorkShops: WORKSHOP
+  titleWorkShops: NISSAN Technology
   timeWorkShops: 
-  descWorkShops: 
-  panelWorkShops: {fileID: 21300000, guid: 03b5a4b43406fdc4b9a295b331ee9832, type: 3}
+  descWorkShops: 13:45 hrs           Zona "B"
+  panelWorkShops: {fileID: 21300000, guid: b0a0a47a0325a834f8c2469c652cdd87, type: 3}
   idWorkShops: 1
 --- !u!1 &1699067241
 GameObject:
@@ -18640,8 +18643,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 328.8}
-  m_SizeDelta: {x: -300, y: 50}
+  m_AnchoredPosition: {x: -19.5, y: 328.8}
+  m_SizeDelta: {x: -139, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1729257589
 MonoBehaviour:
@@ -19753,11 +19756,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206a96bf0b80faa4e91fd878cd4c4ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameWorkShops: 
-  titleWorkShops: 
+  nameWorkShops: WORKSHOP
+  titleWorkShops: Coaching Empresarial
   timeWorkShops: 
-  descWorkShops: 
-  panelWorkShops: {fileID: 21300000, guid: 03b5a4b43406fdc4b9a295b331ee9832, type: 3}
+  descWorkShops: 17:15 hrs           Zona "B"
+  panelWorkShops: {fileID: 21300000, guid: 644284a202d525042a744a54b7f5ced1, type: 3}
   idWorkShops: 2
 --- !u!1 &1813113342
 GameObject:
@@ -23092,11 +23095,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206a96bf0b80faa4e91fd878cd4c4ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameWorkShops: Alan Estrada
-  titleWorkShops: Alan Estrada
-  timeWorkShops: Alan Estrada
-  descWorkShops: Alan Estrada
-  panelWorkShops: {fileID: 21300000, guid: 1b77a93a37c5a0147a81ff5b127f3d1a, type: 3}
+  nameWorkShops: LUZ OREA
+  titleWorkShops: Mindful living
+  timeWorkShops: 
+  descWorkShops: 12:30 hrs           Zona "B"
+  panelWorkShops: {fileID: 21300000, guid: a69a678498a80b44991515d2c3732acb, type: 3}
   idWorkShops: 0
 --- !u!1 &2052908463
 GameObject:

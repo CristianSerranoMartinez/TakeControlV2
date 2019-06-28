@@ -1,77 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LoadSpeakers : MonoBehaviour {
+    [SerializeField]
+    string nameSpeaker;
+    [SerializeField]
+    string titleSpeaker;
+    [SerializeField]
+    string timeSpeaker;
+    [SerializeField]
+    string descSpeaker;
+    [SerializeField]
+    Sprite panelSpeaker;
+    [SerializeField]
+    int idSpeaker;
 
-	public GameObject buttonPrefab;
-	public Transform tContent;
-    private RectTransform content;
-    string path;
-    string jsonString;
-    private speakersList speakerList = new speakersList();
-    private Sprite[] imgSpeakers;
-
-
-    // Use this for initialization
-    void Start () {
-        RefreshDisplay();
-    }
-
-    private void RefreshDisplay() {
-
-        imgSpeakers = Resources.LoadAll<Sprite>("UI/Speakers");
-        int desplazador = 0;
-       
-        //cargar archivo speakers.json
-        TextAsset asset = Resources.Load("speakers") as TextAsset;
-        speakerList = JsonUtility.FromJson<speakersList>(asset.text);
-
-        foreach (speaker s in speakerList.speakers)
-        {
-            //creamos boton
-            GameObject but = Instantiate(buttonPrefab) as GameObject;
-
-            desplazador += 300;
-
-            //añadirlo al content y cambiar tamaño
-            but.transform.SetParent(tContent.transform);
-            but.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
-            but.SetActive(true);
-            but.transform.GetChild(0).GetComponent<Text>().text = s.time;
-            but.transform.GetChild(1).GetComponent<Text>().text = s.title;
-            but.transform.GetChild(2).GetComponent<Text>().text = s.name;
-
-            //Obtener indice que coincida con el nombre de la imagen y el id del speaker
-            int index = Array.FindIndex(imgSpeakers, img => img.name == s.id);
-
-            but.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(s.name, s.title, s.time, s.desc, imgSpeakers[index], int.Parse(s.id))); 
-
-        }
-
-        //cambiar tamaño del content
-        content = tContent.GetComponent<RectTransform>();
-        desplazador += 100;
-        content.sizeDelta = new Vector2(content.sizeDelta.x, desplazador);
-
-    }
-
-    private void OnButtonClick(string name, string title, string time, string desc, Sprite foto, int id)
+    public void OnButtonClick()
     {
 
         GameObject.Find("PanelSpeakers").GetComponent<PanelSpeakersManager>().OnPressMasterDetail();
-        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(2).GetComponent<Image>().sprite = foto;
-        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(3).GetComponent<Text>().text = name;
-        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(4).GetComponent<Text>().text = title;
-        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(5).GetComponent<Text>().text = desc;
-        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(6).GetComponent<Text>().text = time;
-        GameObject.Find("PanelMasterDetailSpeakers").GetComponent<PanelMasterDetailManagerSpeakers>().idSpeaker = id;
+        GameObject.Find("PanelMasterDetailSpeakers").GetComponent<Image>().sprite = panelSpeaker;
+        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(3).GetComponent<Text>().text = nameSpeaker;
+        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(4).GetComponent<Text>().text = titleSpeaker;
+        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(5).GetComponent<Text>().text = descSpeaker;
+        GameObject.Find("PanelMasterDetailSpeakers").transform.GetChild(6).GetComponent<Text>().text = timeSpeaker;
+        GameObject.Find("PanelMasterDetailSpeakers").GetComponent<PanelMasterDetailManagerSpeakers>().idSpeaker = idSpeaker;
 
     }
-
 }
 
 [System.Serializable]

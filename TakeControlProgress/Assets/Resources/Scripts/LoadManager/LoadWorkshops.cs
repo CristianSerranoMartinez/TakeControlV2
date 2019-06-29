@@ -22,7 +22,7 @@ public class LoadWorkshops : MonoBehaviour
 
         GameObject.Find("PanelWorkShops").GetComponent<PanelWorkShopsManager>().OnPressMasterDetail();
         GameObject.Find("PanelMasterDetailWorkShops").GetComponent<Image>().sprite = panelWorkShops;
-        GameObject.Find("PanelMasterDetailWorkShops").transform.GetChild(3).GetComponent<Text>().text = nameWorkShops;
+        GameObject.Find("PanelMasterDetailWorkShops").transform.GetChild(2).GetComponent<Text>().text = nameWorkShops;
         GameObject.Find("PanelMasterDetailWorkShops").transform.GetChild(4).GetComponent<Text>().text = titleWorkShops;
         GameObject.Find("PanelMasterDetailWorkShops").transform.GetChild(5).GetComponent<Text>().text = descWorkShops;
         GameObject.Find("PanelMasterDetailWorkShops").transform.GetChild(6).GetComponent<Text>().text = timeWorkShops;

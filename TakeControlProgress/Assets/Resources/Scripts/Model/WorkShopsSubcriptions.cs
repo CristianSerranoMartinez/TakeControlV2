@@ -6,12 +6,14 @@ using UnityEngine;
 public class WorkShopsSubcriptions {
     public bool one;
     public bool two;
+    public bool three;
 
     public WorkShopsSubcriptions() { }
 
-    public WorkShopsSubcriptions(bool one, bool two)
+    public WorkShopsSubcriptions(bool one, bool two, bool three)
     {
         this.one = one;
         this.two = two;
+        this.three = three;
     }
 }

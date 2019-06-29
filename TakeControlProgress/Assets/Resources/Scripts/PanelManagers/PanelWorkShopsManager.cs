@@ -39,6 +39,7 @@ public class PanelWorkShopsManager : MonoBehaviour {
             switch (gameObject.name)
             {
                 case "PanelMasterDetailWorkShops": gameObject.SetActive(true); break;
+                default: gameObject.SetActive(false);break;
             }
         }
     }

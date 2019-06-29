@@ -22,12 +22,12 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
 
     WorkShopsSubcriptions workShopsSubcriptions;
 
-    public bool[] boolArray = new bool[2];
+    public bool[] boolArray = new bool[3];
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape)) { GetComponent<Animator>().SetTrigger("Close"); }
+    { 
+        if (Input.GetKeyDown(KeyCode.Escape)) { OnPressButtonOutPanel(); }
     }
 
     public void OnPressButtonOutPanel()
@@ -37,7 +37,15 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
 
     public void ClosePanel()
     {
-        gameObject.SetActive(false);
+
+        foreach (GameObject gameObject in arrayPanels)
+        {
+            switch (gameObject.name)
+            {
+                case "PanelWorkShops": gameObject.SetActive(true); break;
+                default: gameObject.SetActive(false); break;
+            }
+        }
     }
 
 
@@ -47,11 +55,12 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
         {
             case 0: { boolArray[0] = true; } break;
             case 1: { boolArray[1] = true; } break;
+            case 2: { boolArray[2] = true; } break;
             default: break;
 
         }
 
-        workShopsSubcriptions = new WorkShopsSubcriptions(boolArray[0], boolArray[1]);
+        workShopsSubcriptions = new WorkShopsSubcriptions(boolArray[0], boolArray[1], boolArray[2]);
 
         UpdateBase();
     }
@@ -118,11 +127,13 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
 
                 boolArray[0] = workShopsSubcriptions.one;
                 boolArray[1] = workShopsSubcriptions.two;
+                boolArray[2] = workShopsSubcriptions.three;
 
                 switch (idWorkShops)
                 {
                     case 0: { buttonRegister.SetActive(!boolArray[0]); buttonDoQuestion.SetActive(boolArray[0]); } break;
                     case 1: { buttonRegister.SetActive(!boolArray[1]); buttonDoQuestion.SetActive(boolArray[1]); } break;
+                    case 2: { buttonRegister.SetActive(!boolArray[2]); buttonDoQuestion.SetActive(boolArray[2]); } break;
                 }
             }
         });

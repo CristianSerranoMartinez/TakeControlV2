@@ -32,9 +32,7 @@ public class PanelWorkShopsTakenManager : MonoBehaviour {
 
     public void OnPressButtonAccept()
     {
-        workShopsSubcriptions = new WorkShopsSubcriptions(arrayToggles[0].isOn,
-            arrayToggles[1].isOn
-            );
+        workShopsSubcriptions = new WorkShopsSubcriptions(arrayToggles[0].isOn, arrayToggles[1].isOn, arrayToggles[2]);
         UpdateBase();
     }
 
@@ -95,6 +93,7 @@ public class PanelWorkShopsTakenManager : MonoBehaviour {
                 workShopsSubcriptions = JsonUtility.FromJson<WorkShopsSubcriptions>(snapshot.GetRawJsonValue());
                 arrayToggles[0].isOn = workShopsSubcriptions.one;
                 arrayToggles[1].isOn = workShopsSubcriptions.two;
+                arrayToggles[2].isOn = workShopsSubcriptions.three;
             }
         });
     }

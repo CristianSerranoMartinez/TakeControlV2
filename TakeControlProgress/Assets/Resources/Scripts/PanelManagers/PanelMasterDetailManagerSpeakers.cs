@@ -24,10 +24,10 @@ public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
     SpeakersSubcriptions speakersSubcriptions;
 
     public bool[] boolArray = new bool[3];
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape)) { GetComponent<Animator>().SetTrigger("Close"); }
+
+    // Update is called once per frame
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) { OnPressButtonOutPanel(); }
     }
 
     public void OnPressButtonOutPanel()
@@ -37,7 +37,15 @@ public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
 
     public void ClosePanel()
     {
-        gameObject.SetActive(false);
+
+        foreach (GameObject gameObject in arrayPanels)
+        {
+            switch (gameObject.name)
+            {
+                case "PanelSpeakers": gameObject.SetActive(true); break;
+                default: gameObject.SetActive(false); break;
+            }
+        }
     }
 
 

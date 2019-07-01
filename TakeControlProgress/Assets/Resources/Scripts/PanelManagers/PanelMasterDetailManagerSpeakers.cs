@@ -203,4 +203,15 @@ public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
             }
         });
     }
+
+    public void OnPressButtonQuestion()
+    {
+        foreach (GameObject gameObject in arrayPanels)
+        {
+            switch (gameObject.name)
+            {
+                case "PanelConfirmSpeakerQuestion": gameObject.SetActive(true); gameObject.GetComponent<PanelConfirmSpeakerQuestion>().SetValues(idSpeaker, "", Session.currentUser.username); break;
+            }
+        }
+    }
 }

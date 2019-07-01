@@ -203,4 +203,15 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
             }
         });
     }
+
+    public void OnPressButtonQuestion()
+    {
+        foreach (GameObject gameObject in arrayPanels)
+        {
+            switch (gameObject.name)
+            {
+                case "PanelConfirmWorkShopQuestion": gameObject.SetActive(true); gameObject.GetComponent<PanelConfirmWorkShopQuestion>().SetValues(idWorkShops, "", Session.currentUser.username); break;
+            }
+        }
+    }
 }

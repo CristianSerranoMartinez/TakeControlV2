@@ -45,63 +45,20 @@ public class PanelConfirmWorkShopQuestion : MonoBehaviour {
 
             FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://tomaelcontrol-830dd.firebaseio.com/");
             DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+     
+            string key = reference.Child("WorkShopsQuestions").Child(Session.auth.CurrentUser.UserId).Push().Key;
             question = inputFieldQuestion.text;
-            workShopsQuestions = new WorkShopsQuestions(intSpeakerId, question, username);
-            string json = JsonUtility.ToJson(workShopsQuestions);
-            reference.Child("WorkShopsQuestions").Child(Session.auth.CurrentUser.UserId).SetRawJsonValueAsync(json).ContinueWith(task =>
-            {
+            WorkShopsQuestions workShopsQuestions = new WorkShopsQuestions(intSpeakerId, question, username);
 
-                if (task.IsCanceled)
-                {
-                    Debug.LogError("SetRawJsonValueAsync was canceled.");
-                    AggregateException exception = task.Exception as AggregateException;
-                    if (exception != null)
-                    {
-                        FirebaseException fireBaseException = null;
-                        foreach (Exception e in exception.InnerExceptions)
-                        {
-                            fireBaseException = e as FirebaseException;
-                            if (fireBaseException != null)
-                                break;
-                        }
+            Dictionary<string, System.Object> entryValues = workShopsQuestions.ToDictionary();
 
-                        if (fireBaseException != null)
-                        {
-                            Debug.LogError("SetRawJsonValueAsync encountered an error: " + fireBaseException.Message);
-                            textLog.text = fireBaseException.Message;
-                        }
-                    }
-                    return;
-                }
-                if (task.IsFaulted)
-                {
-                    Debug.LogError("SetRawJsonValueAsync was faulted.");
-                    AggregateException exception = task.Exception as System.AggregateException;
-                    if (exception != null)
-                    {
-                        FirebaseException fireBaseException = null;
-                        foreach (System.Exception e in exception.InnerExceptions)
-                        {
-                            fireBaseException = e as FirebaseException;
-                            if (fireBaseException != null)
-                                break;
-                        }
+            Dictionary<string, System.Object> childUpdates = new Dictionary<string, System.Object>();
 
-                        if (fireBaseException != null)
-                        {
-                            Debug.LogError("SetRawJsonValueAsync encountered an error: " + fireBaseException.Message);
-                            textLog.text = fireBaseException.Message;
-                        }
-                    }
-                    return;
-                }
-                if (task.IsCompleted)
-                {
-                    panelLoading.SetActive(false);
-                    textLog.text = "Done!";
-                    gameObject.SetActive(false);
-                }
-            });
+            childUpdates["/WorkShopsQuestions/" + Session.auth.CurrentUser.UserId + "/" + key] = entryValues;
+
+            reference.UpdateChildrenAsync(childUpdates);
+            panelLoading.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 

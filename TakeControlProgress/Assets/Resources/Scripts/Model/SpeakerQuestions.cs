@@ -14,4 +14,14 @@ public class SpeakerQuestions{
         this.question = question;
         this.username = username;
     }
+
+    public Dictionary<string, System.Object> ToDictionary()
+    {
+        Dictionary<string, System.Object> result = new Dictionary<string, System.Object>();
+        result["intSpeakerId"] = intSpeakerId;
+        result["question"] = question;
+        result["username"] = username;
+
+        return result;
+    }
 }

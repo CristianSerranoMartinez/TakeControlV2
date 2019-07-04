@@ -17,4 +17,10 @@ public class PanelIntroductionManager : MonoBehaviour {
             }
         }
     }
+
+    private void OnApplicationQuit()
+    {
+        if (Session.auth != null)
+            Session.auth.SignOut();
+    }
 }

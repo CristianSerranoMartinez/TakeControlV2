@@ -210,7 +210,8 @@ public class PanelSignUpManager : MonoBehaviour
                                             }
                                             if (task4.IsCompleted)
                                             {
-                                                LoadNextScene();
+                                                //LoadNextScene();
+                                                CreateSpeakerSection();
                                             }
                                         });
                                     }
@@ -266,5 +267,135 @@ public class PanelSignUpManager : MonoBehaviour
     {
         if (Session.auth != null)
             Session.auth.SignOut();
+    }
+
+
+    private void CreateSpeakerSection()
+    {
+        // Set up the Editor before calling into the realtime database.
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://tomaelcontrol-830dd.firebaseio.com/");//Here you should change for you base data link!!!!
+
+        // Get the root reference location of the database.
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        SpeakersSubcriptions speakersSubcriptions = new SpeakersSubcriptions(false,false,false);
+        string json = JsonUtility.ToJson(speakersSubcriptions);
+        reference.Child("SpeakersSubcriptions").Child(Session.auth.CurrentUser.UserId).SetRawJsonValueAsync(json).ContinueWith(task => {
+
+            if (task.IsCanceled)
+            {
+                panelLoading.SetActive(false);
+                Debug.LogError("SetRawJsonValueAsync was canceled.");
+                AggregateException exception = task.Exception as AggregateException;
+                if (exception != null)
+                {
+                    FirebaseException fireBaseException = null;
+                    foreach (Exception e in exception.InnerExceptions)
+                    {
+                        fireBaseException = e as FirebaseException;
+                        if (fireBaseException != null)
+                            break;
+                    }
+
+                    if (fireBaseException != null)
+                    {
+                        Debug.LogError("SetRawJsonValueAsync encountered an error: " + fireBaseException.Message);
+                        textLogError.text = fireBaseException.Message;
+                    }
+                }
+                return;
+            }
+            if (task.IsFaulted)
+            {
+                panelLoading.SetActive(false);
+                Debug.LogError("SetRawJsonValueAsync was faulted.");
+                AggregateException exception = task.Exception as AggregateException;
+                if (exception != null)
+                {
+                    FirebaseException fireBaseException = null;
+                    foreach (Exception e in exception.InnerExceptions)
+                    {
+                        fireBaseException = e as FirebaseException;
+                        if (fireBaseException != null)
+                            break;
+                    }
+
+                    if (fireBaseException != null)
+                    {
+                        Debug.LogError("SetRawJsonValueAsync encountered an error: " + fireBaseException.Message);
+                        textLogError.text = fireBaseException.Message;
+                    }
+                }
+                return;
+            }
+            if (task.IsCompleted)
+            {
+                CreateWorkShops();
+            }
+        });
+    }
+
+    public void CreateWorkShops()
+    {
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://tomaelcontrol-830dd.firebaseio.com/");//Here you should change for you base data link!!!!
+
+        // Get the root reference location of the database.
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+
+        WorkShopsSubcriptions workShopsSubcriptions = new WorkShopsSubcriptions(false,false,false);
+        string json = JsonUtility.ToJson(workShopsSubcriptions);
+        reference.Child("WorkShopsSubcriptions").Child(Session.auth.CurrentUser.UserId).SetRawJsonValueAsync(json).ContinueWith(task => {
+
+            if (task.IsCanceled)
+            {
+                panelLoading.SetActive(false);
+                Debug.LogError("SetRawJsonValueAsync was canceled.");
+                AggregateException exception = task.Exception as AggregateException;
+                if (exception != null)
+                {
+                    FirebaseException fireBaseException = null;
+                    foreach (Exception e in exception.InnerExceptions)
+                    {
+                        fireBaseException = e as FirebaseException;
+                        if (fireBaseException != null)
+                            break;
+                    }
+
+                    if (fireBaseException != null)
+                    {
+                        Debug.LogError("SetRawJsonValueAsync encountered an error: " + fireBaseException.Message);
+                        textLogError.text = fireBaseException.Message;
+                    }
+                }
+                return;
+            }
+            if (task.IsFaulted)
+            {
+                panelLoading.SetActive(false);
+                Debug.LogError("SetRawJsonValueAsync was faulted.");
+                AggregateException exception = task.Exception as System.AggregateException;
+                if (exception != null)
+                {
+                    FirebaseException fireBaseException = null;
+                    foreach (System.Exception e in exception.InnerExceptions)
+                    {
+                        fireBaseException = e as FirebaseException;
+                        if (fireBaseException != null)
+                            break;
+                    }
+
+                    if (fireBaseException != null)
+                    {
+                        Debug.LogError("SetRawJsonValueAsync encountered an error: " + fireBaseException.Message);
+                        textLogError.text = fireBaseException.Message;
+                    }
+                }
+                return;
+            }
+            if (task.IsCompleted)
+            {
+                //panelLoading.SetActive(false);
+                LoadNextScene();
+            }
+        });
     }
 }

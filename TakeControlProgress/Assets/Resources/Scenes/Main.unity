@@ -6382,10 +6382,11 @@ MonoBehaviour:
   - {fileID: 852924311}
   - {fileID: 444556122}
   - {fileID: 1069395486}
-  textLogError: {fileID: 0}
+  textLogError: {fileID: 1757085920}
   buttonRegister: {fileID: 324780166}
   buttonDoQuestion: {fileID: 542751243}
   idWorkShops: 0
+  panelLoading: {fileID: 378895672}
   boolArray: 000000
 --- !u!95 &852924314
 Animator:
@@ -12266,9 +12267,10 @@ MonoBehaviour:
   - {fileID: 1510932449}
   - {fileID: 1283403399}
   - {fileID: 782533105}
-  textLogError: {fileID: 0}
+  textLogError: {fileID: 1465918935}
   buttonRegister: {fileID: 2144202528}
   buttonDoQuestion: {fileID: 802980601}
+  panelLoading: {fileID: 378895672}
   idSpeaker: 0
   boolArray: 000000
 --- !u!95 &1510932454
@@ -17266,7 +17268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2144202529
 RectTransform:
   m_ObjectHideFlags: 0

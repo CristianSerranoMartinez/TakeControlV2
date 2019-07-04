@@ -68,4 +68,10 @@ public class PanelConfirmWorkShopQuestion : MonoBehaviour {
         this.question = question;
         this.username = username;
     }
+
+    private void OnApplicationQuit()
+    {
+        if (Session.auth != null)
+            Session.auth.SignOut();
+    }
 }

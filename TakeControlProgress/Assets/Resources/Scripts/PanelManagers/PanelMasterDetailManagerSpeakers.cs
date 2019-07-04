@@ -19,6 +19,9 @@ public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
     [SerializeField]
     private GameObject buttonDoQuestion;
 
+    [SerializeField]
+    private GameObject panelLoading;
+
     public int idSpeaker;
 
     SpeakersSubcriptions speakersSubcriptions;
@@ -27,6 +30,8 @@ public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        panelLoading.transform.GetChild(0).transform.Rotate(0, 0, 5);
+
         if (Input.GetKeyDown(KeyCode.Escape)) { OnPressButtonOutPanel(); }
     }
 
@@ -69,19 +74,18 @@ public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
     {
         buttonDoQuestion.SetActive(false);
         buttonRegister.SetActive(false);
-        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://tomaelcontrol-830dd.firebaseio.com/");
-        FirebaseDatabase.DefaultInstance.GetReference("SpeakersSubcriptions/" + Session.auth.CurrentUser.UserId).GetValueAsync().ContinueWith(task => {
+        panelLoading.SetActive(true);
 
+        FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://tomaelcontrol-830dd.firebaseio.com/");
+        FirebaseDatabase.DefaultInstance.GetReference("SpeakersSubcriptions").Child(Session.auth.CurrentUser.UserId).GetValueAsync().ContinueWith(task => {
             if (task.IsFaulted)
             {
-                //panelLoading.SetActive(false);
                 AggregateException exception = task.Exception as AggregateException;
                 if (exception != null)
                 {
                     FirebaseException fireBaseException = null;
                     foreach (Exception e in exception.InnerExceptions)
                     {
-                        //panelLoading.SetActive(false);
                         fireBaseException = e as FirebaseException;
                         if (fireBaseException != null)
                             break;
@@ -117,9 +121,10 @@ public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
                 }
                 return;
             }
-
+           
             if (task.IsCompleted)
             {
+
                 DataSnapshot snapshot = task.Result;
 
                 speakersSubcriptions = JsonUtility.FromJson<SpeakersSubcriptions>(snapshot.GetRawJsonValue());
@@ -134,7 +139,9 @@ public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
                     case 0: { buttonRegister.SetActive(!boolArray[0]); buttonDoQuestion.SetActive(boolArray[0]); } break;
                     case 1: { buttonRegister.SetActive(!boolArray[1]); buttonDoQuestion.SetActive(boolArray[1]); } break;
                     case 2: { buttonRegister.SetActive(!boolArray[2]); buttonDoQuestion.SetActive(boolArray[2]); } break;
-                }       
+                }
+
+                panelLoading.SetActive(false);
             }
         });
     }
@@ -142,6 +149,7 @@ public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
 
     public void UpdateBase()
     {
+        panelLoading.SetActive(true);
         // Set up the Editor before calling into the realtime database.
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://tomaelcontrol-830dd.firebaseio.com/");//Here you should change for you base data link!!!!
 
@@ -200,6 +208,7 @@ public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
                 buttonRegister.SetActive(false);
                 buttonDoQuestion.SetActive(true);
                 textLogError.text = "Done!";
+                panelLoading.SetActive(false);
             }
         });
     }
@@ -213,5 +222,11 @@ public class PanelMasterDetailManagerSpeakers : MonoBehaviour {
                 case "PanelConfirmSpeakerQuestion": gameObject.SetActive(true); gameObject.GetComponent<PanelConfirmSpeakerQuestion>().SetValues(idSpeaker, "", Session.currentUser.username); break;
             }
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (Session.auth != null)
+            Session.auth.SignOut();
     }
 }

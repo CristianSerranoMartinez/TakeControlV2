@@ -22,11 +22,15 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
 
     WorkShopsSubcriptions workShopsSubcriptions;
 
+    [SerializeField]
+    private GameObject panelLoading;
+
     public bool[] boolArray = new bool[3];
 
     // Update is called once per frame
     void Update()
-    { 
+    {
+        panelLoading.transform.GetChild(0).transform.Rotate(0, 0, 5);
         if (Input.GetKeyDown(KeyCode.Escape)) { OnPressButtonOutPanel(); }
     }
 
@@ -69,19 +73,19 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
     {
         buttonDoQuestion.SetActive(false);
         buttonRegister.SetActive(false);
+        panelLoading.SetActive(true);
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://tomaelcontrol-830dd.firebaseio.com/");
-        FirebaseDatabase.DefaultInstance.GetReference("WorkShopsSubcriptions/" + Session.auth.CurrentUser.UserId).GetValueAsync().ContinueWith(task => {
+        FirebaseDatabase.DefaultInstance.GetReference("WorkShopsSubcriptions").Child(Session.auth.CurrentUser.UserId).GetValueAsync().ContinueWith(task => {
 
             if (task.IsFaulted)
             {
-                //panelLoading.SetActive(false);
+                
                 AggregateException exception = task.Exception as AggregateException;
                 if (exception != null)
                 {
                     FirebaseException fireBaseException = null;
                     foreach (Exception e in exception.InnerExceptions)
                     {
-                        //panelLoading.SetActive(false);
                         fireBaseException = e as FirebaseException;
                         if (fireBaseException != null)
                             break;
@@ -135,6 +139,7 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
                     case 1: { buttonRegister.SetActive(!boolArray[1]); buttonDoQuestion.SetActive(boolArray[1]); } break;
                     case 2: { buttonRegister.SetActive(!boolArray[2]); buttonDoQuestion.SetActive(boolArray[2]); } break;
                 }
+                panelLoading.SetActive(false);
             }
         });
     }
@@ -142,6 +147,7 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
 
     public void UpdateBase()
     {
+        panelLoading.SetActive(true);
         // Set up the Editor before calling into the realtime database.
         FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://tomaelcontrol-830dd.firebaseio.com/");//Here you should change for you base data link!!!!
 
@@ -200,6 +206,7 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
                 buttonRegister.SetActive(false);
                 buttonDoQuestion.SetActive(true);
                 textLogError.text = "Done!";
+                panelLoading.SetActive(false);
             }
         });
     }
@@ -213,5 +220,11 @@ public class PanelMasterDetailManagerWorkShops : MonoBehaviour {
                 case "PanelConfirmWorkShopQuestion": gameObject.SetActive(true); gameObject.GetComponent<PanelConfirmWorkShopQuestion>().SetValues(idWorkShops, "", Session.currentUser.username); break;
             }
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (Session.auth != null)
+            Session.auth.SignOut();
     }
 }

@@ -69,4 +69,10 @@ public class PanelSpeakersManager : MonoBehaviour {
             }
         }
     }
+
+    private void OnApplicationQuit()
+    {
+        if (Session.auth != null)
+            Session.auth.SignOut();
+    }
 }

@@ -39,4 +39,10 @@ public class PanelSettingsManager : MonoBehaviour {
     {
         gameObject.SetActive(false);
     }
+
+    private void OnApplicationQuit()
+    {
+        if (Session.auth != null)
+            Session.auth.SignOut();
+    }
 }

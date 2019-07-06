@@ -210,8 +210,15 @@ public class PanelSignUpManager : MonoBehaviour
                                             }
                                             if (task4.IsCompleted)
                                             {
-                                                //LoadNextScene();
-                                                CreateSpeakerSection();
+                                                Session.auth.CurrentUser.SendEmailVerificationAsync().ContinueWith(task5=> {
+                                                    if(task5.IsFaulted)
+                                                        textLogError.text = "Something was wrong, Please check your data!";
+                                                    if(task5.IsCanceled)
+                                                        textLogError.text = "Something was wrong, Please check your data!";
+                                                    if(task5.IsCompleted)
+                                                        CreateSpeakerSection();
+                                                });
+                                                
                                             }
                                         });
                                     }
@@ -221,8 +228,7 @@ public class PanelSignUpManager : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogError(String.Format(
-                          "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+                        Debug.LogError(String.Format("Could not resolve all Firebase dependencies: {0}", dependencyStatus));
                     }
                 });
             }
@@ -393,9 +399,17 @@ public class PanelSignUpManager : MonoBehaviour
             }
             if (task.IsCompleted)
             {
-                //panelLoading.SetActive(false);
-                LoadNextScene();
-            }
+                panelLoading.SetActive(false);
+                textLogError.text = "We send to you an email for verify your account...";
+
+                inputFieldNickName.text = "";
+
+                inputFieldEmail.text = "";
+
+                inputFieldPassword.text = "";
+
+                inputFieldConfirmPassword.text="";
+}
         });
     }
 }

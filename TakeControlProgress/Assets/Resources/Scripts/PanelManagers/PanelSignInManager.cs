@@ -60,60 +60,70 @@ public class PanelSignInManager : MonoBehaviour {
                     {
                         Session.auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
 
-                        Debug.Log("DefaultInstance");
-                        Session.auth.SignInWithEmailAndPasswordAsync(inputFieldEmail.text, inputFieldPassword.text).ContinueWith(task2 => {
-                            if (task2.IsCanceled)
-                            {
-                                panelLoading.SetActive(false);
-                                Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
-                                AggregateException exception = task2.Exception as AggregateException;
-                                if (exception != null)
-                                {
-                                    FirebaseException fireBaseException = null;
-                                    foreach (Exception e in exception.InnerExceptions)
-                                    {
-                                        fireBaseException = e as FirebaseException;
-                                        if (fireBaseException != null)
-                                            break;
-                                    }
+                        if (Session.auth.CurrentUser.IsEmailVerified)
+                        {
 
-                                    if (fireBaseException != null)
-                                    {
-                                        Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + fireBaseException.Message);
-                                        textLogError.text = fireBaseException.Message;
-                                    }
-                                }
-                                return;
-                            }
-                            if (task2.IsFaulted)
+                            Debug.Log("DefaultInstance");
+                            Session.auth.SignInWithEmailAndPasswordAsync(inputFieldEmail.text, inputFieldPassword.text).ContinueWith(task2 =>
                             {
-                                panelLoading.SetActive(false);
-                                Debug.Log("IsFaulted");
-                                Debug.LogError("SignInWithEmailAndPasswordAsync was faulted.");
-                                AggregateException exception = task2.Exception as AggregateException;
-                                if (exception != null)
+                                if (task2.IsCanceled)
                                 {
-                                    FirebaseException fireBaseException = null;
-                                    foreach (Exception e in exception.InnerExceptions)
+                                    panelLoading.SetActive(false);
+                                    Debug.LogError("SignInWithEmailAndPasswordAsync was canceled.");
+                                    AggregateException exception = task2.Exception as AggregateException;
+                                    if (exception != null)
                                     {
-                                        fireBaseException = e as FirebaseException;
-                                        if (fireBaseException != null)
-                                            break;
-                                    }
+                                        FirebaseException fireBaseException = null;
+                                        foreach (Exception e in exception.InnerExceptions)
+                                        {
+                                            fireBaseException = e as FirebaseException;
+                                            if (fireBaseException != null)
+                                                break;
+                                        }
 
-                                    if (fireBaseException != null)
-                                    {
-                                        Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + fireBaseException.Message);
-                                        textLogError.text = fireBaseException.Message;
+                                        if (fireBaseException != null)
+                                        {
+                                            Debug.LogError("SignInWithEmailAndPasswordAsync encountered an error: " + fireBaseException.Message);
+                                            textLogError.text = fireBaseException.Message;
+                                        }
                                     }
+                                    return;
                                 }
-                                return;
-                            }
-                            if (task2.IsCompleted)
-                            {
-                                LoadNextScene();
-                            }
-                        });
+                                if (task2.IsFaulted)
+                                {
+                                    panelLoading.SetActive(false);
+                                    Debug.Log("IsFaulted");
+                                    Debug.LogError("SignInWithEmailAndPasswordAsync was faulted.");
+                                    AggregateException exception = task2.Exception as AggregateException;
+                                    if (exception != null)
+                                    {
+                                        FirebaseException fireBaseException = null;
+                                        foreach (Exception e in exception.InnerExceptions)
+                                        {
+                                            fireBaseException = e as FirebaseException;
+                                            if (fireBaseException != null)
+                                                break;
+                                        }
+
+                                        if (fireBaseException != null)
+                                        {
+                                            Debug.LogError("CreateUserWithEmailAndPasswordAsync encountered an error: " + fireBaseException.Message);
+                                            textLogError.text = fireBaseException.Message;
+                                        }
+                                    }
+                                    return;
+                                }
+                                if (task2.IsCompleted)
+                                {
+                                    LoadNextScene();
+                                }
+                            });
+                        }
+                        else
+                        {
+                            panelLoading.SetActive(false);
+                            textLogError.text = "Please you has to verify your email";
+                        }
 
                     }
                     else
@@ -122,6 +132,7 @@ public class PanelSignInManager : MonoBehaviour {
                           "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
                     }
                 });
+                
             }
         }
         else

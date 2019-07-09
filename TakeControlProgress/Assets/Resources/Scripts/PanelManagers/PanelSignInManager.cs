@@ -60,9 +60,8 @@ public class PanelSignInManager : MonoBehaviour {
                     {
                         Session.auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
 
-                        if (Session.auth.CurrentUser.IsEmailVerified)
-                        {
-
+                        //if (Session.auth.CurrentUser.IsEmailVerified)
+                        //{
                             Debug.Log("DefaultInstance");
                             Session.auth.SignInWithEmailAndPasswordAsync(inputFieldEmail.text, inputFieldPassword.text).ContinueWith(task2 =>
                             {
@@ -115,16 +114,22 @@ public class PanelSignInManager : MonoBehaviour {
                                 }
                                 if (task2.IsCompleted)
                                 {
-                                    LoadNextScene();
+                                    UnityMainThread.wkr.AddJob(() =>
+                                    {
+                                        LoadNextScene();
+                                    });
+
                                 }
                             });
-                        }
-                        else
-                        {
-                            panelLoading.SetActive(false);
-                            textLogError.text = "Please you has to verify your email";
-                        }
-
+                       // }
+                      //  else
+                      //  {
+                         //   UnityMainThread.wkr.AddJob(() =>
+                       //     {
+                             //   panelLoading.SetActive(false);
+                        //        textLogError.text = "Please you has to verify your email";
+                           // });
+                      //  }
                     }
                     else
                     {

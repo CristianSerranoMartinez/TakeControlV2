@@ -86,18 +86,6 @@ public class PanelMainManager : MonoBehaviour {
         });
     }
 
-    public void OnPressButtonSettings()
-    {
-        foreach (GameObject gameObject in arrayPanels)
-        {
-            switch (gameObject.name)
-            {
-                case "PanelSettings": gameObject.SetActive(true); break;
-                default: gameObject.SetActive(false); break;
-            }
-        }
-    }
-
     public void OnPressButtonUser()
     {
         foreach (GameObject gameObject in arrayPanels)
